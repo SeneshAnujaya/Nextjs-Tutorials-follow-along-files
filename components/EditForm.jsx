@@ -1,6 +1,16 @@
 'use client';
 import { editTask } from '@/utils/actions';
-import React from 'react'
+import React from 'react';
+import { useFormStatus } from 'react-dom';
+
+const EditBtn = () => {
+
+  const {pending} = useFormStatus();
+
+  return(
+    <button type='submit' className='btn btn-primary btn-block btn-sm' disabled={pending}>{pending ? "pending..." : "edit"}</button>
+  );
+}
 
 const EditForm = ({ task }) => {
 
@@ -18,7 +28,7 @@ const EditForm = ({ task }) => {
           <input type='checkbox' defaultChecked={completed} id='completed' name='completed' className='checkbox checkbox-primary checkbox-sm'/>
         </label>
       </div>
-      <button type='submit' className='btn btn-primary btn-block btn-sm'>edit</button>
+      <EditBtn />
     </form>
   )
 }
